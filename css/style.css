@@ -1,0 +1,132 @@
+body {
+    margin: 0;
+    padding: 1rem 2rem;
+    height: 100%;
+    background-color: #bef;
+}
+
+section {
+    border-radius: 2rem;
+    padding: 1rem;
+    background-color: #efb;
+    margin-bottom: 2rem;
+}
+
+.dice-collection {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    h2 {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+
+.dice {
+    border: 2px solid black;
+
+    height: 3rem;
+    width: 3rem;
+    padding: 1rem;
+    /*Gör såhär ist för att */
+
+    border-radius: 0.3rem;
+    background-color: #fefefe;
+    display: grid;
+    grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.dice aside {
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
+    background-color: #000;
+}
+
+.dots-6 {
+    grid-auto-flow: column;
+    aside:nth-last-child(3), aside:nth-last-child(2), aside:last-child {
+        grid-column-start: 3;
+    }
+}
+
+.dots-5 {
+    /*Flyttar inte på min första punkt så att den automatiskt hamnar i första cellen, 
+    ifall den t.ex. hade givits grid-column-start: 3; 
+    så hade senare punkter förskjutits (i frånvaron av ytterligare styling) */
+    
+    /*Punkt 2 till höger*/
+    aside:nth-child(2) {
+        grid-column-start: 3;
+    }
+
+    /*Punkt 3 i mittenkolumn och mittenrad*/
+    aside:nth-child(3) {
+        grid-area: 2/2;
+    }
+
+    /*Punkt 4 till botten*/
+    aside:nth-child(4) {
+        grid-row-start: 3;
+    }
+
+    /*Sista punkten längst ner till höger*/
+    aside:last-child {
+        grid-area: 3/3;
+    }
+}
+
+.dots-4 {
+    /*Punkt nr 2 och 4 i sista kolumnen, de andra hamnar automatiskt i kol 1*/
+    aside:nth-child(2), aside:last-child {
+        grid-column-start: 3;
+    }
+    /*Placerar punkt nr 3 och 4 i sista raden, de andra hamnar automatiskt i rad 1*/
+    aside:nth-child(3), aside:last-child {
+        grid-row-start: 3;
+    }
+}
+
+.dots-3 {
+    /*Placerar punkt 2 i mitten*/
+    aside:nth-child(2) {
+        grid-area: 2/2;
+    }
+
+    /*Placerar sista punkten nere till höger*/
+    aside:last-child {
+        grid-area: 3/3;
+    }
+}
+
+.dots-2 { 
+    /*Andra punkten flyttas till nedre högra hörnet, första hamnar automatiskt "rätt",
+    hade funkat att tillämpa på first-child istället eftsm grid-row förskjutning verkar 
+    orsaka att ordning ignoreras (till skillnad från grid-column förskjutning),
+    men ser bättre ut att det är last child som flyttas imo*/
+    aside:last-child {
+        grid-area: 3/3 ;
+    }
+
+
+    /*Case in point för det där om ordningen: följande kod ger samma utseende, 
+    aside:last-child hamnar i första cellen trots att den har högre order än den första */
+
+    /*  
+    aside:first-child {
+        grid-area: 3/3 ;
+    }
+    aside:last-child {
+        order: 1;
+    } 
+    */
+}
+
+.dots-1 { 
+    /*EZPZ :))*/
+    aside {
+        grid-area: 2/2;
+    }
+}
